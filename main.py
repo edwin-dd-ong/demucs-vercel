@@ -5,8 +5,10 @@ from flask import Flask, request, jsonify, send_file
 
 app = Flask(__name__)
 
-@app.route('/process', methods=['POST'])
+@app.route('/process', methods=['POST', 'GET'])
 def process_twostem():
+    if request.method == 'GET':
+        return "Hello, World!"
     print(f"Request headers: {request.headers}")
     if 'file' not in request.files:
         return jsonify({"error": "No file uploaded"}), 400
